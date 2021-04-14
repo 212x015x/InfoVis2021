@@ -1,0 +1,49 @@
+<html>
+<head>
+    <title>W02: task3</title>
+</head>
+<body>
+    <h3>1個目の3次元座標を入力</h3>
+    <input type="number" id="x0" value="0">
+    <input type="number" id="y0" value="0">
+    <input type="number" id="z0" value="0">
+    <h3>2個目の3次元座標を入力</h3>
+    <input type="number" id="x1" value="0"> 
+    <input type="number" id="y1" value="0">
+    <input type="number" id="z1" value="0">
+    <h3>3個目の3次元座標を入力</h3>
+    <input type="number" id="x2" value="0">
+    <input type="number" id="y2" value="0">
+    <input type="number" id="z2" value="0">
+
+    <h3>3角形の面積の計算</h3>
+    <input type="button" value="Answer" onclick="clickBtn2()">
+
+    <p id="demo"></p>
+
+    <script src="vec3.js"></script>
+    <script>
+        
+        function clickBtn2(){
+            
+            var x0 = document.getElementById("x0").value;
+            var y0 = document.getElementById("y0").value;
+            var z0 = document.getElementById("z0").value;
+            var x1 = document.getElementById("x1").value;
+            var y1 = document.getElementById("y1").value;
+            var z1 = document.getElementById("z1").value;
+            var x2 = document.getElementById("x2").value;
+            var y2 = document.getElementById("y2").value;
+            var z2 = document.getElementById("z2").value;
+
+            var vec0 = new Vec3(x0, y0, z0);
+            var vec1 = new Vec3(x1, y1, z1);
+            var vec2 = new Vec3(x2, y2, z2);
+            var S = vec0.triangle(vec1, vec2);
+
+            document.getElementById("demo").innerHTML = S;
+        }
+       
+    </script>
+</body>
+</html>
