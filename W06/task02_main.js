@@ -124,8 +124,4 @@ class ScatterPlot {
         self.yaxis_group
             .call( self.yaxis );
 
-        self.ylabel
-            .call( self.ylabel )
-            .attr('rotate', '90');
-    }
 }
