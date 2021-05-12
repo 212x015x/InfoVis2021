@@ -33,6 +33,8 @@ class BarChart{
             .domain([0, d3.max(self.data, d => d.w)])
             .range([0, self.inner_width])
         
+        console.log(self.data)
+
         self.yscale = d3.scaleBand()
             .domain(self.data.map(d => d.l))
             .range([0, self.inner_height])
