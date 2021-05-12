@@ -1,6 +1,6 @@
-d3.csv("https://212x015x.github.io/InfoVis2021/W08/task01_data.csv")
+d3.csv("https://212x015x.github.io/InfoVis2021/W08/task02_data.csv")
     .then( data => {
-        data.forEach( d => { d.l = d.l; d.w = + d.w; });
+        data.forEach( d => { d.x = + d.x; d.y = + d.y; });
         
         console.log(data)
 
@@ -14,8 +14,8 @@ d3.csv("https://212x015x.github.io/InfoVis2021/W08/task01_data.csv")
             ylabel: 'Y label'
         };
 
-        const barchart = new BarChart( config, data );
-        barchart.update();
+        const linechart = new LineChart( config, data );
+        linechart.update();
     })
     .catch( error => {
         console.log( error );
