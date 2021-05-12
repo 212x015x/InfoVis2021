@@ -6,7 +6,7 @@ d3.csv("https://212x015x.github.io/InfoVis2021/W08/task01_data.csv")
             parent: '#drawing_region',
             width: 256,
             height: 256,
-            margin: {top:25, right:10, bottom:50, left:50},
+            margin: {top:50, right:10, bottom:20, left:60},
             title: 'Sample Data',
             xlabel: 'X label',
             ylabel: 'Y label'

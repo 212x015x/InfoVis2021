@@ -86,7 +86,7 @@ class BarChart{
     update(){
         let self = this;
 
-        
+        /*
         const space = 10;
         const xmin = d3.min( self.data, d => d.x ) - space;
         const xmax = d3.max( self.data, d => d.x ) + space;
@@ -95,7 +95,7 @@ class BarChart{
         const ymin = d3.min( self.data, d => d.y ) - space;
         const ymax = d3.max( self.data, d => d.y ) + space;
         self.yscale.domain( [ymax, ymin] );
-        
+        */
         self.render();   
     }
 
