@@ -9,6 +9,7 @@ var data = [
 var width = 256;
 var height = 256;
 var radius = Math.min( width, height ) / 2;
+console.log(radius)
 
 var svg = d3.select('#drawing_region')
     .attr('width', width)
