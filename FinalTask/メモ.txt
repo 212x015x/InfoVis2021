@@ -1,0 +1,11 @@
+社会保障費によって自殺率に違いはあるのか？
+
+年代別、社会保障費割合別に表示する
+
+https://www.oecd.org/tokyo/statistics/
+
+社会保障負担率
+OECD (2021), Social security contributions (indicator). doi: 10.1787/3ebfe901-en (Accessed on 01 June 2021)
+
+自殺率
+OECD (2021), Suicide rates (indicator). doi: 10.1787/a82f3459-en (Accessed on 01 June 2021)
