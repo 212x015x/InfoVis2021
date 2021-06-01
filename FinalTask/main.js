@@ -3,37 +3,55 @@ let scatter_plot;
 let bar_chart;
 let filter = [];
 
-d3.csv("https://vizlab-kobe-lecture.github.io/InfoVis2021/W12/iris.csv")
+d3.csv("https://212x015x.github.io/InfoVis2021/FinalTask/DP_LIVE_tax.csv")
     .then( data => {
         input_data = data;
         input_data.forEach( d => {
-            d.sepal_length = +d.sepal_length;
-            d.sepal_width = +d.sepal_width;
+            d.l = +d.LOCATION;
+            d.t = +d.TIME;
+            d.v = +d.Value;
         });
 
         const color_scale = d3.scaleOrdinal( d3.schemeCategory10 );
         color_scale.domain(['setosa','versicolor','virginica']);
 
-        scatter_plot = new ScatterPlot( {
-            parent: '#drawing_region_scatterplot',
-            width: 256,
-            height: 256,
+        line_plot = new LineChart( {
+            parent: '#drawing_region_linechart',
+            width: 1024,
+            height: 1024,
             margin: {top:10, right:10, bottom:50, left:50},
-            xlabel: 'Sepal length [cm]',
-            ylabel: 'Sepal width [cm]',
+            xlabel: 'Year',
+            ylabel: 'Social security contributions',
             cscale: color_scale
         }, input_data );
-        scatter_plot.update();
+        line_plot.update();
+    })
+    .catch( error => {
+        console.log( error );
+    });
 
-        bar_chart = new BarChart( {
-            parent: '#drawing_region_barchart',
-            width: 256,
-            height: 256,
+d3.csv("https://212x015x.github.io/InfoVis2021/FinalTask/DP_LIVE_01062021063129849.csv")
+    .then( data => {
+        input_data = data;
+        input_data.forEach( d => {
+            d.l = +d.LOCATION;
+            d.t = +d.TIME;
+            d.v = +d.Value;
+        });
+
+        const color_scale = d3.scaleOrdinal( d3.schemeCategory10 );
+        color_scale.domain(['setosa','versicolor','virginica']);
+
+        sui_plot = new LineChart( {
+            parent: '#drawing_region_sui_plot',
+            width: 1024,
+            height: 1024,
             margin: {top:10, right:10, bottom:50, left:50},
-            xlabel: 'Species',
+            xlabel: 'Year',
+            ylabel: 'Social security contributions',
             cscale: color_scale
         }, input_data );
-        bar_chart.update();
+        sui_plot.update();
     })
     .catch( error => {
         console.log( error );
