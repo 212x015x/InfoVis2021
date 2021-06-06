@@ -9,3 +9,7 @@ OECD (2021), Social security contributions (indicator). doi: 10.1787/3ebfe901-en
 
 自殺率
 OECD (2021), Suicide rates (indicator). doi: 10.1787/a82f3459-en (Accessed on 01 June 2021)
+
+Tax
+
+OECD (2021), Tax revenue (indicator). doi: 10.1787/d98b8cf5-en (Accessed on 06 June 2021)

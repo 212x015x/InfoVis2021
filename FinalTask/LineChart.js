@@ -96,12 +96,13 @@ class LineChart {
 
     render() {
         let self = this;
-
-        const area_color = 'mistyrose';
-        self.chart.append("path")
-            .attr('d', self.area(self.data))
-            .attr('stroke', area_color)
-            .attr('fill', area_color);
+        
+        let keys = self.data.columns.slice(0)
+        let s_data = self.data.map( d =>{
+            let rdata = {}
+            return rdata
+            })
+        console.log(s_data)
 
         const line_width = 3;
         const line_color = 'firebrick';
@@ -120,7 +121,22 @@ class LineChart {
             .attr('cx', self.line.x())
             .attr('cy', self.line.y())
             .attr('r', circle_radius)
-            .attr('fill', circle_color);
+            .attr('fill', circle_color)
+            .on('mouseover', (e,d) => {
+                d3.select('#tooltip')
+                    .style('opacity', 1)
+                    .html(`<div class="tooltip-label">${d.l}</div>(${d.x}, ${d.y})`);
+            })
+            .on('mousemove', (e) => {
+                const padding = 10;
+                d3.select('#tooltip')
+                    .style('left', (e.pageX + padding) + 'px')
+                    .style('top', (e.pageY + padding) + 'px');
+            })
+            .on('mouseleave', () => {
+                d3.select('#tooltip')
+                    .style('opacity', 0);
+            });
 
         self.xaxis_group.call(self.xaxis);
         self.yaxis_group.call(self.yaxis);
