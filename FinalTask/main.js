@@ -3,7 +3,7 @@ let scatter_plot;
 let bar_chart;
 let filter = [];
 
-d3.csv("https://212x015x.github.io/InfoVis2021/FinalTask/DP_LIVE_tax.csv")
+d3.csv("https://212x015x.github.io/InfoVis2021/FinalTask/DP_LIVE_Tax_rate.csv")
     .then( data => {
         input_data = data;
         input_data.forEach( d => {
