@@ -1,6 +1,7 @@
 let input_data;
-let scatter_plot;
-let bar_chart;
+let sui_data;
+let line_plot;
+let sui_chart;
 let filter = [];
 
 d3.csv("https://212x015x.github.io/InfoVis2021/FinalTask/DP_LIVE_Tax_rate.csv")
@@ -22,8 +23,8 @@ d3.csv("https://212x015x.github.io/InfoVis2021/FinalTask/DP_LIVE_Tax_rate.csv")
 
         line_plot = new LineChart( {
             parent: '#drawing_region_linechart',
-            width: 1024,
-            height: 1024,
+            width: 900,
+            height: 900,
             margin: {top:10, right:10, bottom:50, left:50},
             xlabel: 'Year',
             ylabel: 'Social security contributions',
@@ -35,10 +36,10 @@ d3.csv("https://212x015x.github.io/InfoVis2021/FinalTask/DP_LIVE_Tax_rate.csv")
         console.log( error );
     });
 
-d3.csv("https://212x015x.github.io/InfoVis2021/FinalTask/DP_LIVE_01062021063129849.csv")
+d3.csv("https://212x015x.github.io/InfoVis2021/FinalTask/DP_LIVE_Suicide.csv")
     .then( data => {
-        input_data = data;
-        input_data.forEach( d => {
+        sui_data = data;
+        sui_data.forEach( d => {
             d.l = d.LOCATION;
             d.i = d.INDICATOR;
             d.s = d.SUBJECT;
@@ -54,13 +55,13 @@ d3.csv("https://212x015x.github.io/InfoVis2021/FinalTask/DP_LIVE_010620210631298
 
         sui_plot = new LineChart( {
             parent: '#drawing_region_sui_plot',
-            width: 1024,
-            height: 1024,
+            width: 900,
+            height: 900,
             margin: {top:10, right:10, bottom:50, left:50},
             xlabel: 'Year',
             ylabel: 'Suicide',
             cscale: color_scale
-        }, input_data );
+        }, sui_data );
         sui_plot.update();
     })
     .catch( error => {
@@ -69,10 +70,16 @@ d3.csv("https://212x015x.github.io/InfoVis2021/FinalTask/DP_LIVE_010620210631298
 
 function Filter() {
     if ( filter.length == 0 ) {
-        scatter_plot.data = input_data;
+        sui_plot.data = sui_data;
+        line_plot.data = input_data;
     }
     else {
-        scatter_plot.data = input_data.filter( d => filter.includes( d.l ) );
+        sui_plot.data = sui_data.filter( d => filter.includes( d.l ) );
+        line_plot.data = input_data.filter( d => filter.includes( d.l ) );
+
+        console.log("what")
+        console.log(sui_plot.data)
     }
-    scatter_plot.update();
+    sui_plot.update();
+    line_plot.update();
 }

@@ -40,20 +40,6 @@ class LineChart {
             .ticks(5)
             .tickSizeOuter(0);
 
-        self.xaxis_group = self.chart.append('g')
-            .attr('transform', `translate(0, ${self.inner_height})`);
-
-        self.yaxis_group = self.chart.append('g');
-
-        const title_space = 10;
-        self.svg.append('text')
-            .style('font-size', '20px')
-            .style('font-weight', 'bold')
-            .attr('text-anchor', 'middle')
-            .attr('x', self.config.width / 2)
-            .attr('y', self.config.margin.top - title_space)
-            .text( self.config.title );
-
         const xlabel_space = 40;
         self.svg.append('text')
             .attr('x', self.config.width / 2)
@@ -73,6 +59,22 @@ class LineChart {
     update() {
         let self = this;
 
+        self.chart.remove();
+        self.chart = self.svg.append('g')
+            .attr('transform', `translate(${self.config.margin.left}, ${self.config.margin.top})`);
+        
+        
+        self.xaxis_group = self.chart.append('g')
+            .attr('transform', `translate(0, ${self.inner_height})`);
+
+        self.yaxis_group = self.chart.append('g');
+
+        self.nested = d3.nest().key(d => d.l)
+            .entries(self.data);
+    
+        console.log(self.nested)
+
+
         const space = 5;
         const xmin = d3.min(self.data, d => d.x) - space;
         const xmax = d3.max(self.data, d => d.x) + space;
@@ -86,34 +88,26 @@ class LineChart {
             .x( d => self.xscale(d.x) )
             .y( d => self.yscale(d.y) );
 
-        self.area = d3.area()
-            .x( d => self.xscale(d.x) )
-            .y1( d => self.yscale(d.y) )
-            .y0( self.inner_height );
-
         self.render();
     }
 
     render() {
         let self = this;
         
-        let keys = self.data.columns.slice(0)
-        let s_data = self.data.map( d =>{
-            let rdata = {}
-            return rdata
-            })
-        console.log(s_data)
-
         const line_width = 3;
         const line_color = 'firebrick';
-        self.chart.append("path")
-            .attr('d', self.line(self.data))
+        self.chart.selectAll('line')
+            .data(self.nested)
+            .enter()
+            .append("path")
+            .transition().duration(self.config.duration)
+            .attr('d', d => self.line(d.values))
             .attr('stroke', line_color)
             .attr('stroke-width', line_width)
             .attr('fill', 'none');
 
-        const circle_radius = 5;
-        const circle_color = 'firebrick';
+        const circle_radius = 3;
+        const circle_color = 'red';
         self.chart.selectAll("circle")
             .data(self.data)
             .enter()
@@ -136,6 +130,17 @@ class LineChart {
             .on('mouseleave', () => {
                 d3.select('#tooltip')
                     .style('opacity', 0);
+            })
+            .on('click', function(ev,d) {
+                const is_active = filter.includes(d.l);
+                if ( is_active ) {
+                    filter = filter.filter( f => f !== d.l );
+                }
+                else {
+                    filter.push( d.l );
+                }
+                Filter();
+                d3.select(this).classed('active', !is_active);
             });
 
         self.xaxis_group.call(self.xaxis);
